@@ -1,5 +1,10 @@
 Mautic Introduction
 ===========
+
+Note:
+
+- `study` branched from `staging`
+
 ![Mautic](https://www.mautic.org/media/images/github_readme.png "Mautic Open Source Marketing Automation")
 
 ## Getting Started
