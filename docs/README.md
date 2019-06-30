@@ -11,4 +11,7 @@ $ git remote add mautic https://github.com/mautic/mautic.git
 $ git checkout staging
 $ git fetch mautic
 $ git merge mautic/staging
+$ git checkout study
+$ git merge staging
+.
 ~~~
