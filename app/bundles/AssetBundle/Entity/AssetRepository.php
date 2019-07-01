@@ -204,7 +204,7 @@ class AssetRepository extends CommonRepository
 
         $q->update(MAUTIC_TABLE_PREFIX.'assets')
             ->set('download_count', 'download_count + '.(int) $increaseBy)
-            ->where('id = '.(int) $id);
+            ->where('id = '.(int) $id);         // assets.download_count を 増やす 
 
         if ($unique) {
             $q->set('unique_download_count', 'unique_download_count + '.(int) $increaseBy);

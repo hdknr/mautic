@@ -150,7 +150,7 @@ class AssetModel extends FormModel
         parent::saveEntity($entity, $unlock);
     }
 
-    /**
+    /** ダウンロードをトラッキングする
      * @param $asset
      * @param null   $request
      * @param string $code
@@ -163,17 +163,17 @@ class AssetModel extends FormModel
     {
         // Don't skew results with in-house downloads
         if (empty($systemEntry) && !$this->security->isAnonymous()) {
-            return;
+            return;     // Mautic にログインしていたらカウントしない
         }
 
         if ($request == null) {
             $request = $this->request;
         }
 
-        $download = new Download();
+        $download = new Download();     // asset_donwload レコードを１件作成
         $download->setDateDownload(new \Datetime());
 
-        // Download triggered by lead
+        // Download triggered by lead: リード(+トラッキング情報)を決定してdownloadにセットする
         if (empty($systemEntry)) {
             //check for any clickthrough info
             $clickthrough = $request->get('ct', false);
@@ -284,11 +284,11 @@ class AssetModel extends FormModel
             $isUnique = $this->getDownloadRepository()->isUniqueDownload($asset->getId(), $trackingId);
         }
 
-        $download->setTrackingId($trackingId);
+        $download->setTrackingId($trackingId);  // トラッキングID
 
-        if (!empty($asset) && empty($systemEntry)) {
+        if (!empty($asset) && empty($systemEntry)) {            // アセット
             $download->setAsset($asset);
-
+            // アセットのダウンロードカウントをインクリメント
             $this->getRepository()->upDownloadCount($asset->getId(), 1, $isUnique);
         }
 
@@ -296,9 +296,9 @@ class AssetModel extends FormModel
         $ipAddress = $this->ipLookupHelper->getIpAddress();
 
         $download->setCode($code);
-        $download->setIpAddress($ipAddress);
+        $download->setIpAddress($ipAddress);            // IPアドレス
 
-        if ($request !== null) {
+        if ($request !== null) {                        // リファラ
             $download->setReferer($request->server->get('HTTP_REFERER'));
         }
 
@@ -310,7 +310,7 @@ class AssetModel extends FormModel
 
         // Wrap in a try/catch to prevent deadlock errors on busy servers
         try {
-            $this->em->persist($download);
+            $this->em->persist($download);          // テーブルに保存
             $this->em->flush();
         } catch (\Exception $e) {
             if (MAUTIC_ENV === 'dev') {

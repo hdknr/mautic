@@ -73,10 +73,10 @@ class PublicController extends CommonFormController
                 $dispatcher->dispatch(AssetEvents::ASSET_ON_DOWNLOAD, $event);
             }
 
-            if ($entity->isRemote()) {
+            if ($entity->isRemote()) {  // リモートアセットのダウンロード
                 $model->trackDownload($entity, $this->request, 200);
 
-                // Redirect to remote URL
+                // Redirect to remote URL: リダイレクトする
                 $response = new RedirectResponse($entity->getRemotePath());
             } else {
                 try {
