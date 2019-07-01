@@ -230,12 +230,12 @@ class ContactTracker
      */
     public function getTrackingId()
     {
-        // Use the new method first
+        // Use the new method first (トラッキングされたデバイスにセットされたトラッキングIDを見つける)
         if ($trackedDevice = $this->deviceTracker->getTrackedDevice()) {
             return $trackedDevice->getTrackingId();
         }
 
-        // That failed, so look for the old cookies
+        // That failed, so look for the old cookies(なかったら、クッキーを探す)
         return $this->contactTrackingService->getTrackedIdentifier();
     }
 

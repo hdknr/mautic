@@ -120,6 +120,7 @@ final class ContactTrackingService implements ContactTrackingServiceInterface
      */
     public function getTrackedIdentifier()
     {
+        // mautic_session_id がトラッキングID
         return $this->cookieHelper->getCookie('mautic_session_id', null);
     }
 }

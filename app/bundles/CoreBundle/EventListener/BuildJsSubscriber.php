@@ -244,7 +244,7 @@ function s4() {
 }
 
 MauticJS.mtcSet = false;
-MauticJS.appendTrackedContact = function(data) {
+MauticJS.appendTrackedContact = function(data) {    // mautic_device_id は ブラウザのローカルストレージにも保存
     if (window.localStorage) {
         if (mtcId  = localStorage.getItem('mtc_id')) {
             data['mautic_device_id'] = localStorage.getItem('mautic_device_id');

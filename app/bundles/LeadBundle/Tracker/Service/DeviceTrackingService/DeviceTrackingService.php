@@ -182,6 +182,7 @@ final class DeviceTrackingService implements DeviceTrackingServiceInterface
             return $this->trackedDevice->getTrackingId();
         }
 
+        // mautic_device_idクッキー値、もしくは mautic_device_id クエリ
         $deviceTrackingId = $this->cookieHelper->getCookie('mautic_device_id', null);
         if ($deviceTrackingId === null) {
             $deviceTrackingId = $this->request->get('mautic_device_id', null);
@@ -204,7 +205,7 @@ final class DeviceTrackingService implements DeviceTrackingServiceInterface
     }
 
     /**
-     * @param LeadDevice $device
+     * @param LeadDevice $device : トラッキング情報生成
      */
     private function createTrackingCookies(LeadDevice $device)
     {
@@ -221,7 +222,7 @@ final class DeviceTrackingService implements DeviceTrackingServiceInterface
     }
 
     /**
-     * @deprecated 2.13.0 to be removed in 3.0
+     * @deprecated 2.13.0 to be removed in 3.0 (なくなる予定)
      *
      * @param LeadDevice $device
      */
