@@ -21,6 +21,7 @@ class UpdateLeadListsCommand extends ModeratedCommand
 {
     protected function configure()
     {
+        // セグメント更新(updateとrebuildは同じ)
         $this
             ->setName('mautic:segments:update')
             ->setAliases(['mautic:segments:rebuild'])

@@ -38,7 +38,7 @@ use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 /**
- * Class ListModel
+ * Class ListModel   リード一覧
  * {@inheritdoc}
  */
 class ListModel extends FormModel
@@ -930,6 +930,7 @@ class ListModel extends FormModel
      */
     public function rebuildListLeads(LeadList $leadList, $limit = 100, $maxLeads = false, OutputInterface $output = null)
     {
+        // リードリストの再構築
         defined('MAUTIC_REBUILDING_LEAD_LISTS') or define('MAUTIC_REBUILDING_LEAD_LISTS', 1);
 
         $dtHelper = new DateTimeHelper();
